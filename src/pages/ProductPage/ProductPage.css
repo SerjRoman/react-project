@@ -1,0 +1,22 @@
+.product-body {
+  display: flex;
+  gap: 10px;
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 15px 1px;
+}
+
+.product-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.product-buttons button {
+  width: 300px;
+  height: 70px;
+}
