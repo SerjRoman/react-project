@@ -3,10 +3,14 @@ import { useProductById } from "../../hooks/useProductById"
 import "./ProductPage.css"
 import { TailSpin } from "react-loader-spinner"
 import { useProducts } from "../../hooks/useProducts"
+import { cartContext } from "../../shared/App"
+import { useContext } from "react"
 
 export function ProductPage() {
     const params = useParams()
     const { product, loading, error } = useProductById(Number(params.id))
+    
+    const {cartItems} = useContext(cartContext)
 
     return (
         <div>
