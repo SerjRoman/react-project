@@ -1,14 +1,17 @@
 import { Modal } from "../Modal/Modal";
 import "./SearchBar.css";
 import { useState, useRef, useEffect } from "react";
-import { useProducts } from "../../hooks/useProducts";
+import { IProduct, useProducts } from "../../hooks/useProducts";
 import { Link } from "react-router-dom";
 
 export function SearchBar() {
 	const { products } = useProducts();
-
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const modalContainerRef = useRef<HTMLDivElement | null>(null);
+	const [entered, setEntered] = useState("");
+	const [filteredItems, setFilteredItems] = useState<IProduct[]>([]);
+	// const [value, setValue] = useState<string>("")
+	// функция, которая открывает и закрывает модалочку в зависимости есть фокус на инпуте или нет
 	const inputOnFocus = () => {
 		if (isModalOpen) {
 			setIsModalOpen(false);
@@ -16,12 +19,31 @@ export function SearchBar() {
 			setIsModalOpen(true);
 		}
 	};
-	const [value, setValue] = useState<string>("")
+	// Юзефект, который фильтрует товары
+	useEffect(() => {
+		// условие, которое сравнивает введенное с продуктами
+		if (entered.trim() === "") {
+			setFilteredItems([]);
+			return;
+		} else {
+			const filtered = products.filter((item) => {
+				return item.title.toLowerCase().includes(entered.toLowerCase());
+			});
+			setFilteredItems(filtered);
+		}
+	}, [entered, products]);
+	// функция которая отслежвает изменения в инпуте
+	function inputChanges(event: React.ChangeEvent<HTMLInputElement>) {
+		const value = event.target.value;
+		setEntered(value);
+	}
+
 	return (
 		<div
 			className="searchBar"
 			ref={modalContainerRef}
 			onClick={(event) => {
+                // останавсливает всплытие
 				event.stopPropagation();
 			}}
 		>
@@ -29,11 +51,8 @@ export function SearchBar() {
 				type="text"
 				onFocus={inputOnFocus}
 				placeholder="Пошук продукта"
-				onInput={(event) => {
-
-					setValue((event.target as HTMLInputElement).value)
-                    // Реализовать фильтрацию
-				}}
+				onInput={inputChanges}
+				// Реализовать фильтрацию
 			/>
 			<svg
 				width="28"
@@ -51,6 +70,7 @@ export function SearchBar() {
 					stroke-linejoin="round"
 				/>
 			</svg>
+            {/* модалочка существует */}
 			{isModalOpen ? (
 				<Modal
 					doCloseOutside={true}
@@ -64,7 +84,8 @@ export function SearchBar() {
 					}
 					className="searchBarModal"
 				>
-					{products.map((product) => {
+                    {/* отображение отфильтрованных продуктов */}
+					{filteredItems.map((product) => {
 						return (
 							<div className="item">
 								<svg
@@ -83,8 +104,15 @@ export function SearchBar() {
 										stroke-linejoin="round"
 									/>
 								</svg>
-								<img src={product.image} alt=""  className="search-item-img"/>
-								<Link to={"/product/" + product.id} className="search-item">
+								<img
+									src={product.image}
+									alt=""
+									className="search-item-img"
+								/>
+								<Link
+									to={"/product/" + product.id}
+									className="search-item"
+								>
 									{product.title.slice(0, 50)}...
 								</Link>
 							</div>
