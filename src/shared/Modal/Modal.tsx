@@ -1,16 +1,14 @@
 import "./Modal.css"
-
-import { ReactNode, useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
-
+import { ReactNode, useEffect, useRef } from "react"
+import { createPortal } from "react-dom"
 
 
 interface IModalProps {
-	children: ReactNode;
-	doCloseOutside: boolean;
-	onClose: () => void;
-	container?: Element;
-	className: string;
+	children: ReactNode
+	doCloseOutside: boolean
+	onClose: () => void
+	container?: Element
+	className: string
 }
 
 export function Modal(props: IModalProps) {
@@ -20,7 +18,7 @@ export function Modal(props: IModalProps) {
 		onClose,
 		container = document.body,
 		className,
-	} = props;
+	} = props
 
 	const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -35,14 +33,14 @@ export function Modal(props: IModalProps) {
 			document.addEventListener("click", handleClickOutside);
 			return () => {
 				document.removeEventListener("click", handleClickOutside);
-			};
+			}
 		}
-	}, []); 
+	}, []) 
     
 	return createPortal(
 		(<div ref={modalRef} className={"modal " + className} >
 			{children}
 		</div>),
 		container
-	);
+	)
 }

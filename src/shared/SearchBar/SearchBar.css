@@ -38,6 +38,11 @@
     border-top: 1px solid black;
 }
 
+.searchBarModal::-webkit-scrollbar {
+    width: 0;
+  }
+  
+
 .item{
     display: flex;
     align-items: center;
