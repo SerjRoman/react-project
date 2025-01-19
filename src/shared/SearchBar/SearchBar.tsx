@@ -17,6 +17,16 @@ export function SearchBar() {
 		}
 	};
 	const [value, setValue] = useState<string>("")
+	const [filteredSearch, setFilteredSearch] = useState(products)
+	const filteredItems = products.filter((product) =>
+		product.title.toLowerCase().includes(value.toLowerCase())
+		)
+	const changeValueSearch = (el: { target: { value: string; }; }) => { 
+	    const searchItem = el.target.value
+	    setValue(searchItem)
+		setFilteredSearch(filteredItems)
+		}
+	
 	return (
 		<div
 			className="searchBar"
@@ -29,11 +39,13 @@ export function SearchBar() {
 				type="text"
 				onFocus={inputOnFocus}
 				placeholder="Пошук продукта"
-				onInput={(event) => {
+				// onInput={(event) => {
 
-					setValue((event.target as HTMLInputElement).value)
-                    // Реализовать фильтрацию
-				}}
+				// 	setValue((event.target as HTMLInputElement).value)
+                //     // Реализовать фильтрацию
+				// }}
+				value={value}
+				onChange={changeValueSearch}
 			/>
 			<svg
 				width="28"
@@ -64,7 +76,7 @@ export function SearchBar() {
 					}
 					className="searchBarModal"
 				>
-					{products.map((product) => {
+					{filteredItems.map((product) => {
 						return (
 							<div className="item">
 								<svg
