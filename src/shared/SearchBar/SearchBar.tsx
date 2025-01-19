@@ -1,13 +1,14 @@
 import { Modal } from "../Modal/Modal";
 import "./SearchBar.css";
 import { useState, useRef, useEffect } from "react";
-import { useProducts } from "../../hooks/useProducts";
+import { IProduct, useProducts } from "../../hooks/useProducts";
 import { Link } from "react-router-dom";
 
 export function SearchBar() {
 	const { products } = useProducts();
-
+	const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([])
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [value, setValue] = useState<string>("")
 	const modalContainerRef = useRef<HTMLDivElement | null>(null);
 	const inputOnFocus = () => {
 		if (isModalOpen) {
@@ -16,7 +17,20 @@ export function SearchBar() {
 			setIsModalOpen(true);
 		}
 	};
-	const [value, setValue] = useState<string>("")
+	useEffect(() => {
+		setFilteredProducts(products);
+		const normalizedQuery = value.trim().toLowerCase()
+		console.log('initial query', value, 'normalized', normalizedQuery)
+		if (normalizedQuery) {
+			const ciCompare = (value: string) => value.toLowerCase().includes(normalizedQuery)
+			setFilteredProducts(
+				products.filter(
+					(product) => ciCompare(product.title) || ciCompare(product.description)
+				)
+			)
+		}
+	},
+		[value])
 	return (
 		<div
 			className="searchBar"
@@ -30,9 +44,7 @@ export function SearchBar() {
 				onFocus={inputOnFocus}
 				placeholder="Пошук продукта"
 				onInput={(event) => {
-
 					setValue((event.target as HTMLInputElement).value)
-                    // Реализовать фильтрацию
 				}}
 			/>
 			<svg
@@ -64,7 +76,7 @@ export function SearchBar() {
 					}
 					className="searchBarModal"
 				>
-					{products.map((product) => {
+					{(value ? filteredProducts : products).map((product) => {
 						return (
 							<div className="item">
 								<svg
@@ -83,7 +95,7 @@ export function SearchBar() {
 										stroke-linejoin="round"
 									/>
 								</svg>
-								<img src={product.image} alt=""  className="search-item-img"/>
+								<img src={product.image} alt="" className="search-item-img" />
 								<Link to={"/product/" + product.id} className="search-item">
 									{product.title.slice(0, 50)}...
 								</Link>
