@@ -3,13 +3,15 @@ import { useProductById } from "../../hooks/useProductById"
 import "./ProductPage.css"
 import { TailSpin } from "react-loader-spinner"
 import { cartContext } from "../../shared/App"
-import { useContext } from "react"
+import { Modal } from "../../shared/Modal/Modal"
+import { useContext, useState } from "react"
 
 export function ProductPage() {
     const params = useParams()
     const { product, loading, error } = useProductById(Number(params.id))
-    
-    const {addItem} = useContext(cartContext)
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    const {addItem, isInCart} = useContext(cartContext)
 
     return (
         <div>
@@ -40,13 +42,30 @@ export function ProductPage() {
             </div>
             <div className="product-buttons">
                 <button className="product-button" onClick={() => {
-                    if (product) {
+                    //если isInCart вернет false - значит продукта нет в корзине(то что нужно при добавлении)
+                    //если isInCart вернет true - значит продукт есть в корзине
+                    // если нам надо что бы было false (для условий надо true) мы переделываем (!) false на true 
+                    if (product && !isInCart(product.id)) {
                         addItem(product)
+                        setIsModalOpen(true)
+                        // setTimeout(func, time) - функция js, которая вызывает func через time
+                        // func - это функция callback 
+                        // time - это ms
+                        setTimeout(()=>{
+                            setIsModalOpen(false)
+                        }, 1000)
                     }
                 }}>В корзину</button>
                 <button className="product-button">Купить</button>
             </div>
         </div>}
+        {isModalOpen === true ?
+        <Modal doCloseOutside={false} onClose={() => {setIsModalOpen(false)}} className="notification">
+            <span>Продукт был успешно добавлен в корзину!</span>
+        </Modal> 
+        :
+        ""
+    }
     </div>
     )
 }

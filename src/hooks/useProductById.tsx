@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { IProduct } from "./useProducts"
-
+//；月木月 ，竹十十十十
 export function useProductById(id: number | undefined){
 
     const [product , setProduct] = useState<IProduct>()
