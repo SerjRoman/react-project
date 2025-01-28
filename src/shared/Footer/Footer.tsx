@@ -1,5 +1,4 @@
 import "./Footer.css"
-// Слава Богу 42🙏❤️СЛАВА 42🙏❤️АНГЕЛА ХРАНИТЕЛЯ 42 КАЖДОМУ ИЗ ВАС🙏❤️БОЖЕ ХРАНИ 42🙏❤️СПАСИБО ВАМ НАШИ БРАТУХИ🙏🏼❤️ХРАНИ БОсса💯Слава Богу 42🙏❤️СЛАВА 42🙏❤️АНГЕЛА ХРАНИТЕЛЯ 42
 export function Footer( ){
     return(
         <div className="Footer">

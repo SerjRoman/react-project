@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import { cartContext } from "../../shared/App";
+import { useCartContext } from "../../context/cartContext";
 
 
 export function CartPage() {
-	const { cartItems, removeItem } = useContext(cartContext);
+	const { cartItems, removeItem } = useCartContext();
+
 	return (
 		<div>
 			{cartItems.map((cartItem) => {

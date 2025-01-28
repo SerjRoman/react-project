@@ -2,16 +2,21 @@ import { useParams } from "react-router-dom"
 import { useProductById } from "../../hooks/useProductById"
 import "./ProductPage.css"
 import { TailSpin } from "react-loader-spinner"
-import { cartContext } from "../../shared/App"
+import { useCartContext } from "../../context/cartContext"
 import { Modal } from "../../shared/Modal/Modal"
-import { useContext, useState } from "react"
+import { useState } from "react"
+
+
+
+
 
 export function ProductPage() {
+    
     const params = useParams()
     const { product, loading, error } = useProductById(Number(params.id))
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    const {addItem, isInCart} = useContext(cartContext)
+    const {addItem, isInCart} = useCartContext()
 
     return (
         <div>
