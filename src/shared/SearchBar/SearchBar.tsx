@@ -10,7 +10,7 @@ export function SearchBar() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const modalContainerRef = useRef<HTMLDivElement | null>(null)
-    const [value, setValue] = useState<string>("")
+    // const [value, setValue] = useState<string>("")
 	// состояние для изменяемых продуктов
     const [filteredProducts, setFilteredProducts] = useState(products)
 
