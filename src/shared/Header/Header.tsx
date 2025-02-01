@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { SearchBar } from "../SearchBar/SearchBar"
 import "./Header.css"
-
+// ヾ(≧へ≦)〃
 export function Header(){
     // const [count, setCount] = useState(0) // useState принимает инициальное значение
     return (
@@ -34,7 +34,7 @@ export function Header(){
                             </clipPath>
                             </defs>
                         </svg>
-                        <p className="cartText">Кошик</p>
+                        <Link className="cartText" to={"/cart"}>Кошик</Link>
                     </button>
 
                     <button className="ImageIcon">
