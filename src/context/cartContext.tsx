@@ -8,7 +8,9 @@ interface ICartContext {
 	addItem: (item: IProduct) => void;
 	removeItem: (id: number) => void;
 	isInCart: (id: number) => boolean;
-}
+    clearCart: () => void;
+    
+} 
 // наше defaultValue
 const initialValue: ICartContext = {
 	cartItems: [],
@@ -17,6 +19,7 @@ const initialValue: ICartContext = {
 	isInCart: (id: number) => {
 		return false;
 	},
+    clearCart: () => {},
 };
 
 // создаем контекст с помощью функции createContext и передаем наше значение по умолчанию
@@ -67,6 +70,10 @@ export function CartContextProvider(props: ICartContextProviderProps) {
 		setCartItems(tempArray);
 	}
 
+    function clearCart(){
+        setCartItems([])
+    }
+
 	function isInCart(id: number) {
 		// ищем продукт в массиве корзины по id. приводим значение найденного эллемента в логическое значение
 		return Boolean(cartItems.find((item) => item.id === id));
@@ -80,6 +87,7 @@ export function CartContextProvider(props: ICartContextProviderProps) {
 				addItem: addItem,
 				removeItem: removeItem,
 				isInCart,
+                clearCart: clearCart
 			}}
 		>
 			{children}
