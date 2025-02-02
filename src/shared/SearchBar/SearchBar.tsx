@@ -1,7 +1,7 @@
 import { Modal } from "../Modal/Modal";
 import "./SearchBar.css";
 import { useState, useRef, useEffect } from "react";
-import { useProducts } from "../../hooks/useProducts";
+import { IProduct, useProducts } from "../../hooks/useProducts";
 import { Link } from "react-router-dom";
 
 export function SearchBar() {
@@ -13,6 +13,10 @@ export function SearchBar() {
     }, [products]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const modalContainerRef = useRef<HTMLDivElement | null>(null);
+	const [entered, setEntered] = useState("");
+	const [filteredItems, setFilteredItems] = useState<IProduct[]>([]);
+	// const [value, setValue] = useState<string>("")
+	// функция, которая открывает и закрывает модалочку в зависимости есть фокус на инпуте или нет
 	const inputOnFocus = () => {
 		if (isModalOpen) {
 			setIsModalOpen(false);
@@ -20,12 +24,31 @@ export function SearchBar() {
 			setIsModalOpen(true);
 		}
 	};
-	const [value, setValue] = useState<string>("")
+	// Юзефект, который фильтрует товары
+	useEffect(() => {
+		// условие, которое сравнивает введенное с продуктами
+		if (entered.trim() === "") {
+			setFilteredItems([]);
+			return;
+		} else {
+			const filtered = products.filter((item) => {
+				return item.title.toLowerCase().includes(entered.toLowerCase());
+			});
+			setFilteredItems(filtered);
+		}
+	}, [entered, products]);
+	// функция которая отслежвает изменения в инпуте
+	function inputChanges(event: React.ChangeEvent<HTMLInputElement>) {
+		const value = event.target.value;
+		setEntered(value);
+	}
+
 	return (
 		<div
 			className="searchBar"
 			ref={modalContainerRef}
 			onClick={(event) => {
+                // останавсливает всплытие
 				event.stopPropagation();
 			}}
 		>
@@ -59,6 +82,7 @@ export function SearchBar() {
 					stroke-linejoin="round"
 				/>
 			</svg>
+            {/* модалочка существует */}
 			{isModalOpen ? (
 				<Modal
 					doCloseOutside={true}

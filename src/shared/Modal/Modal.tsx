@@ -23,13 +23,13 @@ export function Modal(props: IModalProps) {
 	} = props;
 
 	const modalRef = useRef<HTMLDivElement | null>(null);
-
+    // Функция, которая закрывает модалочку если ты кликнешь мимо нее
 	function handleClickOutside(event: MouseEvent) {
 		if (event.target != modalRef.current) {
 			onClose();
 		}
 	}
-
+    // Юзефект, который отлавливает клик вне модалочки
 	useEffect(() => {
 		if (doCloseOutside) {
 			document.addEventListener("click", handleClickOutside);
@@ -38,7 +38,7 @@ export function Modal(props: IModalProps) {
 			};
 		}
 	}, []); 
-    
+    // createPortal переносит модалочку в body
 	return createPortal(
 		(<div ref={modalRef} className={"modal " + className} >
 			{children}
