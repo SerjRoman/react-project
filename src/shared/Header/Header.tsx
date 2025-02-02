@@ -1,19 +1,16 @@
-import { Link } from "react-router-dom";
-import { SearchBar } from "../SearchBar/SearchBar";
-import "./Header.css";
+import { Link } from "react-router-dom"
+import { SearchBar } from "../SearchBar/SearchBar"
+import "./Header.css"
+// ヾ(≧へ≦)〃
+export function Header(){
+    // const [count, setCount] = useState(0) // useState принимает инициальное значение
+    return (
+        <div>
+                <header>
+                    <Link to="/"><img className = "logo" src="https://cdn-icons-png.flaticon.com/512/7817/7817669.png" alt="" /></Link>
+                    
+                    
 
-export function Header() {
-	// const [count, setCount] = useState(0) // useState принимает инициальное значение
-	return (
-		<div>
-			<header>
-				<Link to="/">
-					<img
-						className="logo"
-						src="https://cdn-icons-png.flaticon.com/512/7817/7817669.png"
-						alt=""
-					/>
-				</Link>
 
 				<Link to="/products">
 					<button className="categories">
@@ -34,34 +31,21 @@ export function Header() {
 					</button>
 				</Link>
 
-				<SearchBar />
-
-				<button className="cart">
-					<svg
-						className="cartSvg"
-						width="26"
-						height="26"
-						viewBox="0 0 26 26"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<g clip-path="url(#clip0_9_5037)">
-							<path
-								d="M1.08337 1.08333H5.41671L8.32004 15.5892C8.4191 16.0879 8.69044 16.536 9.08655 16.8548C9.48266 17.1737 9.9783 17.3431 10.4867 17.3333H21.0167C21.5251 17.3431 22.0208 17.1737 22.4169 16.8548C22.813 16.536 23.0843 16.0879 23.1834 15.5892L24.9167 6.5H6.50004M10.8334 22.75C10.8334 23.3483 10.3483 23.8333 9.75004 23.8333C9.15173 23.8333 8.66671 23.3483 8.66671 22.75C8.66671 22.1517 9.15173 21.6667 9.75004 21.6667C10.3483 21.6667 10.8334 22.1517 10.8334 22.75ZM22.75 22.75C22.75 23.3483 22.265 23.8333 21.6667 23.8333C21.0684 23.8333 20.5834 23.3483 20.5834 22.75C20.5834 22.1517 21.0684 21.6667 21.6667 21.6667C22.265 21.6667 22.75 22.1517 22.75 22.75Z"
-								stroke="#1E1E1E"
-								stroke-width="4"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</g>
-						<defs>
-							<clipPath id="clip0_9_5037">
-								<rect width="26" height="26" fill="white" />
-							</clipPath>
-						</defs>
-					</svg>
-					<p className="cartText">Кошик</p>
-				</button>
+                  <SearchBar/> 
+                    
+                    <button className="cart">
+                        <svg className="cartSvg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_9_5037)">
+                            <path d="M1.08337 1.08333H5.41671L8.32004 15.5892C8.4191 16.0879 8.69044 16.536 9.08655 16.8548C9.48266 17.1737 9.9783 17.3431 10.4867 17.3333H21.0167C21.5251 17.3431 22.0208 17.1737 22.4169 16.8548C22.813 16.536 23.0843 16.0879 23.1834 15.5892L24.9167 6.5H6.50004M10.8334 22.75C10.8334 23.3483 10.3483 23.8333 9.75004 23.8333C9.15173 23.8333 8.66671 23.3483 8.66671 22.75C8.66671 22.1517 9.15173 21.6667 9.75004 21.6667C10.3483 21.6667 10.8334 22.1517 10.8334 22.75ZM22.75 22.75C22.75 23.3483 22.265 23.8333 21.6667 23.8333C21.0684 23.8333 20.5834 23.3483 20.5834 22.75C20.5834 22.1517 21.0684 21.6667 21.6667 21.6667C22.265 21.6667 22.75 22.1517 22.75 22.75Z" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_9_5037">
+                            <rect width="26" height="26" fill="white"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+                        <Link className="cartText" to={"/cart"}>Кошик</Link>
+                    </button>
 
 				<button className="ImageIcon">
 					<img
