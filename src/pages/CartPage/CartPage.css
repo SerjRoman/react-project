@@ -1,5 +1,7 @@
 .cart-box{
     overflow-y: scroll;
+    max-height: 70vh;
+
 }
 .cart-item{
     display: flex;
@@ -23,8 +25,8 @@
 }
 
 .item-img{
-    width: 230px;
-    height: 230px;
+    min-width: 230px;
+    max-height: 230px;
     border-radius: 10px;
     margin-right: 20px;
 
