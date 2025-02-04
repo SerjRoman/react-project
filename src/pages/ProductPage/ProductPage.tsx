@@ -7,9 +7,6 @@ import { Modal } from "../../shared/Modal/Modal"
 import { useState } from "react"
 
 
-
-
-
 export function ProductPage() {
     
     const params = useParams()

@@ -46,6 +46,7 @@ export function CartContextProvider(props: ICartContextProviderProps) {
     
 	// const [count, setCount] = useState(0) // useState принимает инициальное значени
 	const [cartItems, setCartItems] = useState<IProduct[]>([]);
+
 	function addItem(item: IProduct) {
 		// Створюємо тимчасовий масив, який копіює старий масив (cartItems) та додає новий елемент (item)
 		const tempArray = [...cartItems, item];
@@ -74,6 +75,8 @@ export function CartContextProvider(props: ICartContextProviderProps) {
         setCartItems([])
     }
 
+
+
 	function isInCart(id: number) {
 		// ищем продукт в массиве корзины по id. приводим значение найденного эллемента в логическое значение
 		return Boolean(cartItems.find((item) => item.id === id));
@@ -87,7 +90,7 @@ export function CartContextProvider(props: ICartContextProviderProps) {
 				addItem: addItem,
 				removeItem: removeItem,
 				isInCart,
-                clearCart: clearCart
+                clearCart: clearCart,
 			}}
 		>
 			{children}
