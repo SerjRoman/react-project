@@ -1,0 +1,146 @@
+.h2_1{
+    text-align: center;
+    font-family: Inter;
+    font-size: 48px;
+}
+
+.h1_1{
+    font-size: 24px;
+}
+
+.oneProduct{
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+    font-size: 16px;
+    font-family: Inter;
+    color: black;
+    min-width: 1270px;
+    width: 1270px;
+    height: 250px;
+    border-bottom: 2px solid black;
+    padding-top: 15px;
+}
+
+.productInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 817px;
+    height: 230px;
+}
+
+
+
+.productImg{
+    width: 230px;
+    height: 230px;
+}
+
+.description{
+    font-size: 16px;
+}
+
+/* .hr_1{
+    height: 10px;
+    background-color: black;
+} */
+
+.buttonsList{
+    display: flex;
+    flex-direction: column;
+    width: 170px;
+    height: 230px;
+    justify-content: space-between;
+    padding: 10px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.buttons{
+    width: 150px;
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    background-color: #FAF0E6;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: center;
+}
+
+.deleteButton1{
+    color: red;
+}
+
+.plusAndMinus{
+    display: flex;
+    gap: 10px;
+}
+
+.pm{
+    width: 40px;
+    height: 40px;
+    border-radius: 32px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    font-size: 24px;
+    text-align: center;
+    font-weight: 100;
+}
+
+.plusBt{
+    background-color: #96FA99;
+}
+
+.minusBt{
+    background-color: #F88686;
+}
+
+.footerCart{
+    position: absolute;
+    width: 1270px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    padding: 10px;
+    /* background-color: red; */
+    /* margin-bottom: 0px; */
+    /* bottom: 0px; */
+    /* justify-content: flex-end; */
+    /* margin-top: 150px; */
+    
+}
+
+.footerCartContainer{
+    /* position: relative; */
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* .allCart{
+    display: flex;
+    flex-direction: column;
+    
+} */
+
+.totalPrice{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 58.09px;
+    font-family: Inter;
+}
+
+.buttonsPrice{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    width: 761px;
+    height: 80px;
+    /* padding: 10px; */
+}
+
+.btP{
+    width: 200px;
+}

@@ -1,5 +1,7 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, SetStateAction, useContext, useState } from "react";
 import { IProduct } from "../hooks/useProducts";
+import { count } from "console";
+
 
 // создаем интерфейс который определяет что будет в нашем контексте
 // interface типизируют обьекты
@@ -7,6 +9,7 @@ interface ICartContext {
 	cartItems: IProduct[];
 	addItem: (item: IProduct) => void;
 	removeItem: (id: number) => void;
+	removeAllItems: () => void;
 	isInCart: (id: number) => boolean;
 }
 // наше defaultValue
@@ -14,6 +17,7 @@ const initialValue: ICartContext = {
 	cartItems: [],
 	addItem: (item: IProduct) => {},
 	removeItem: (id: number) => {},
+	removeAllItems: () => {},
 	isInCart: (id: number) => {
 		return false;
 	},
@@ -67,6 +71,31 @@ export function CartContextProvider(props: ICartContextProviderProps) {
 		setCartItems(tempArray);
 	}
 
+	function removeAllItems() {
+		const tempArray: SetStateAction<IProduct[]> = []
+		setCartItems(tempArray);
+	}
+
+	// function allPrice(price: number) {
+	// 	const tempArray = [...cartItems ];
+	// 	setCartItems(tempArray);
+	// }
+
+	// function plusCart() {
+	// 	const tempArray = count + 1
+	// 	setCartItems(tempArray);
+	// }
+
+	// function plusItem(id: number) {
+	// 	const [plusNum, setPlusNum] = useState(1)
+	// 	const tempArray = cartItems.filter((value) => {
+	// 		value.id
+	// 		return value.id  ;
+	// 	});
+	// 	setCartItems(tempArray);
+	// }
+
+
 	function isInCart(id: number) {
 		// ищем продукт в массиве корзины по id. приводим значение найденного эллемента в логическое значение
 		return Boolean(cartItems.find((item) => item.id === id));
@@ -79,6 +108,7 @@ export function CartContextProvider(props: ICartContextProviderProps) {
 				cartItems: cartItems,
 				addItem: addItem,
 				removeItem: removeItem,
+				removeAllItems: removeAllItems,
 				isInCart,
 			}}
 		>
