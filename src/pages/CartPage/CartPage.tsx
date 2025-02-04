@@ -98,3 +98,60 @@ const handleDeleteAll = () => {
     </div>
   ) 
 }
+
+
+// я честно пытался но там тип добавление через одно место работает
+
+
+// import { useCartContext } from "../../context/cartContext"
+// import { IProduct } from "../../hooks/useProducts"
+// import "./CartPage.css"
+
+// export function CartPage() {
+//   const { cartItems, addItem, removeItem } = useCartContext()
+
+//   function calculateTotalPrice(): number {
+//     return cartItems.reduce((total, item) => total + item.price, 0)
+//   }
+
+//   function handleIncrement(item: IProduct): void {
+//     addItem(item)
+//   }
+
+//   function handleDecrement(id: number): void {
+//     removeItem(id)
+//   }
+//   return (
+//     <div className="cart-box">
+//       {cartItems.map((cartItem) => (
+//         <div className="cart-item" key={cartItem.id}>
+//           <div className="item-card">
+//             <img className="item-img" src={cartItem.image} alt={cartItem.title} />
+//             <div className="item-text">
+//               <p>Discription: {cartItem.description}</p>
+//               <p>Category: {cartItem.category}</p>
+//               <p>Price: {cartItem.price}$</p>
+//               <p>Numbers of items:</p>
+//               <div className="amount-items">
+//                 <button className="btn-plus" onClick={() => handleIncrement(cartItem)}>+</button>
+//                 <button className="btn-minus" onClick={() => handleDecrement(cartItem.id)}>-</button>
+//               </div>
+//             </div>
+//           </div>
+//           <div className="buttons">
+//             <button className="item-btn">Buy</button>
+//             <button className="item-btn">Go to</button>
+//             <button className="item-btn del" onClick={() => removeItem(cartItem.id)}>Delete</button>
+//           </div>
+//         </div>
+//       ))}
+
+//       <div className="summary">
+//         <h1>Total Price: {calculateTotalPrice()}$</h1>
+//         <div className="summary-btns">
+//           <button className="cart-btn">Buy All</button>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
