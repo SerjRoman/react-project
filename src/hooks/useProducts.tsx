@@ -19,7 +19,7 @@ export function useProducts(){
         async function fetchProducts() {
             try{
                 setLoading(true)
-                const response = await fetch("https://fakestoreapi.com/products")
+                const response = await fetch("http://localhost:8000/api/product/all")
                 const productsData = await response.json()
                 setProducts(productsData)
             } catch(error){
