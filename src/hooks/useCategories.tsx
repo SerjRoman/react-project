@@ -16,7 +16,7 @@ export function useCategories(){
         async function fetchCategories(){
             try {
                 setLoading(true)
-                const response = await fetch("https://fakestoreapi.com/products/categories")
+                const response = await fetch("http://localhost:8000/api/category/all")
                 const result = await response.json()
 
                 if (result.status === "ok") {
