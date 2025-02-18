@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "../shared/Layout/Layout";
+import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { ProductListPage } from "../pages/ProductListPage/ProductListPage";
 import { ProductPage } from "../pages/ProductPage/ProductPage";
 import { MainPage } from "../pages/MainPage/MainPage";
@@ -18,6 +19,7 @@ export function AppRoutes() {
 					<Route path="/product/:id" element={<ProductPage />} />
 					<Route path="/" element={<MainPage />} />
 					<Route path="/cart" element={<CartPage />} />
+					<Route path="/login" element={<LoginPage />}></Route>
 				</Route>
 			</Routes>
 		</BrowserRouter>

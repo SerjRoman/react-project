@@ -9,8 +9,8 @@ export function CartPage() {
 			{cartItems.map((cartItem) => {
 				return (
 					<div>
-						<h1>{cartItem.title}</h1>
-						<img src={cartItem.image} />
+						<h1>{cartItem.name}</h1>
+						<img src={cartItem.img} />
 						<button onClick={() => { removeItem(cartItem.id)}}>delete</button>
 					</div>
 				);

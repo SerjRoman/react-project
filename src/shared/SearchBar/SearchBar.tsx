@@ -38,7 +38,7 @@ export function SearchBar() {
 
 					// setValue((event.target as HTMLInputElement).value)
 					// setValue(newValue)
-					setFilteredProducts(products.filter(product => product.title.toLowerCase().startsWith(newValue)));
+					setFilteredProducts(products.filter(product => product.name.toLowerCase().startsWith(newValue)));
 					
 				}}
 				
@@ -91,9 +91,9 @@ export function SearchBar() {
 										stroke-linejoin="round"
 									/>
 								</svg>
-								<img src={filteredProducts.image} alt=""  className="search-item-img"/>
+								<img src={filteredProducts.img} alt=""  className="search-item-img"/>
 								<Link to={"/product/" + filteredProducts.id} className="search-item">
-									{filteredProducts.title.slice(0, 50)}...
+									{filteredProducts.name.slice(0, 50)}...
 								</Link>
 							</div>
 						);

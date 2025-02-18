@@ -12,16 +12,16 @@ import { capitalizeFirstLetter } from "../../tools/capitalizeFirstLetter";
 export function ProductsList() {
 	//    {products, loading }   = {products: [], loading: boolean}
 	const { products, loading, error } = useProducts();
-	const [selectedCategory, setSelectedCategory] = useState("All");
+	const [selectedCategory, setSelectedCategory] = useState<number>(0);
 	const [filteredProducts, setFilteredProducts] = useState(products); // []
 
 	useEffect(() => {
 		console.log(selectedCategory);
-		if (selectedCategory === "All") {
+		if (selectedCategory === 0) {
 			setFilteredProducts(products);
 		} else {
 			const filtered = products.filter((product) => {
-				return product.category === selectedCategory;
+				return product.categoryId === selectedCategory;
 			});
 			setFilteredProducts(filtered);
 		}
@@ -60,16 +60,16 @@ export function ProductsList() {
 					<select
 						className="selectMenu"
 						onChange={(event) => {
-							const selectedValue = event.target.value;
+							const selectedValue = +event.target.value;
 							setSelectedCategory(selectedValue);
 						}}
 					>
-						<option value="All">All</option>
+						<option value="0">All</option>
 						{categories.map((category) => {
 							// electronics -> E + lectronics
 							return (
-								<option value={category}>
-									{capitalizeFirstLetter(category)}
+								<option value={category.id}>
+									{capitalizeFirstLetter(category.name)}
 								</option>
 							);
 						})}
@@ -106,10 +106,11 @@ export function ProductsList() {
 						// key - специальный ключ (id), который используеться при отображении массивов
 						// этот ключ позваляет определить, какой элемент был удален добавлен и т. п.
 						return (
+							// {product.price}
 							<ProductCard
-								name={product.title}
-								img={product.image}
-								price={product.price}
+								name={product.name}
+								img={product.img}
+								price={0}
 								key={product.id}
 								id={product.id}
 							/>
