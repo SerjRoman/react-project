@@ -6,14 +6,13 @@ interface IForm {
 }
 // yup validation
 export function LoginPage() {
-	const { register, handleSubmit, formState, clearErrors} = useForm<IForm>({
-		mode: 'onSubmit',
-
+	const { register, handleSubmit, formState } = useForm<IForm>({
+		mode: "onSubmit",
 	});
 	const onSubmit = (data: IForm) => {
 		console.log(data);
+		// const res = await fetch("http://localhost:8000/api/user/...")
 	};
-	// (⓿_⓿) (●'◡'●) (✿◠‿◠)
 	return (
 		<div>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -22,25 +21,42 @@ export function LoginPage() {
 					<input
 						type="email"
 						{...register("email", {
-							required: {value: true, message: "Field is required"},
-							minLength: {value: 7, message: "Length should be > 7"},
-							maxLength: {value: 50, message: "Length should be < 50"},
+							required: {
+								value: true,
+								message: "Field is required",
+							},
+							minLength: {
+								value: 7,
+								message: "Length should be > 7",
+							},
+							maxLength: {
+								value: 50,
+								message: "Length should be < 50",
+							},
 						})}
-                        onFocus={() => {clearErrors("email")}}
 					/>
-					
-                <p>{formState.errors.email?.message}</p>
+					<p>{formState.errors.email?.message}</p>
 				</label>
 				<label>
 					Password:
 					<input
 						type="password"
 						{...register("password", {
-							required: {value: true, message: "Field is required"},
-							minLength: {value: 7, message: "Length should be > 7"},
-							maxLength: {value: 50, message: "Length should be < 50"},
+							required: {
+								value: true,
+								message: "Field is required",
+							},
+							minLength: {
+								value: 7,
+								message: "Length should be > 7",
+							},
+							maxLength: {
+								value: 50,
+								message: "Length should be < 50",
+							},
 						})}
 					/>
+					<p>{formState.errors.password?.message}</p>
 				</label>
 				<button type="submit">Submit</button>
 			</form>

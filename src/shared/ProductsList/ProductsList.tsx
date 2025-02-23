@@ -12,16 +12,16 @@ import { capitalizeFirstLetter } from "../../tools/capitalizeFirstLetter";
 export function ProductsList() {
 	//    {products, loading }   = {products: [], loading: boolean}
 	const { products, loading, error } = useProducts();
-	const [selectedCategory, setSelectedCategory] = useState<number>(0);
+	const [selectedCategory, setSelectedCategory] = useState<string>("All");
 	const [filteredProducts, setFilteredProducts] = useState(products); // []
 
 	useEffect(() => {
 		console.log(selectedCategory);
-		if (selectedCategory === 0) {
+		if (selectedCategory === "All") {
 			setFilteredProducts(products);
 		} else {
 			const filtered = products.filter((product) => {
-				return product.categoryId === selectedCategory;
+				return product.Category.name === selectedCategory;
 			});
 			setFilteredProducts(filtered);
 		}
@@ -60,15 +60,15 @@ export function ProductsList() {
 					<select
 						className="selectMenu"
 						onChange={(event) => {
-							const selectedValue = +event.target.value;
+							const selectedValue = event.target.value;
 							setSelectedCategory(selectedValue);
 						}}
 					>
-						<option value="0">All</option>
+						<option value="All">All</option>
 						{categories.map((category) => {
 							// electronics -> E + lectronics
 							return (
-								<option value={category.id}>
+								<option value={category.name}>
 									{capitalizeFirstLetter(category.name)}
 								</option>
 							);
