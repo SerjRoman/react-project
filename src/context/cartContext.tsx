@@ -20,7 +20,7 @@ const initialValue: ICartContext = {
 };
 
 // создаем контекст с помощью функции createContext и передаем наше значение по умолчанию
-export const cartContext = createContext<ICartContext>(initialValue);
+const cartContext = createContext<ICartContext>(initialValue);
 
 export function useCartContext(){
 	return useContext(cartContext);

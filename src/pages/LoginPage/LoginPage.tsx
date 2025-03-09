@@ -18,7 +18,7 @@ export function LoginPage() {
 			},
 			body: JSON.stringify(data),
 		})
-        // {}
+
 	};
 	return (
 		<div>

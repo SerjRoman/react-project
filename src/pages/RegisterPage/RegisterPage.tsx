@@ -13,13 +13,13 @@ export function RegisterPage() {
 	});
 	const onSubmit = async (data: IForm) => {
 		console.log(data);
-		const result = await fetch("http://localhost:8000/api/user/registration", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		})
+		// const result = await fetch("http://localhost:8000/api/user/registration", {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// 	body: JSON.stringify(data),
+		// })
 		// const res = await fetch("http://localhost:8000/api/user/...")
 	};
 	return (
