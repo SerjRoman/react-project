@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react"
 
+interface ICategory {
+    name: string;
+    id: number;
+    description: string | null;
+    img: string;
+}
 
 export function useCategories(){
-    const [categories, setCategories] = useState<string[]>([])
+    const [categories, setCategories] = useState<ICategory[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
@@ -10,9 +16,14 @@ export function useCategories(){
         async function fetchCategories(){
             try {
                 setLoading(true)
-                const response = await fetch("https://fakestoreapi.com/products/categories")
-                const categoriesData = await response.json()
-                setCategories(categoriesData)
+                const response = await fetch("http://localhost:8000/api/category/all")
+                const result = await response.json()
+
+                if (result.status === "ok") {
+                    setCategories(result.data)
+                } else {
+                    setError(result.message)
+                }
             } catch(error){
                 if (error instanceof Error) {
                     setError(error.message)

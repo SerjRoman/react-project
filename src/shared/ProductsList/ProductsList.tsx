@@ -12,7 +12,7 @@ import { capitalizeFirstLetter } from "../../tools/capitalizeFirstLetter";
 export function ProductsList() {
 	//    {products, loading }   = {products: [], loading: boolean}
 	const { products, loading, error } = useProducts();
-	const [selectedCategory, setSelectedCategory] = useState("All");
+	const [selectedCategory, setSelectedCategory] = useState<string>("All");
 	const [filteredProducts, setFilteredProducts] = useState(products); // []
 
 	useEffect(() => {
@@ -21,7 +21,7 @@ export function ProductsList() {
 			setFilteredProducts(products);
 		} else {
 			const filtered = products.filter((product) => {
-				return product.category === selectedCategory;
+				return product.Category.name === selectedCategory;
 			});
 			setFilteredProducts(filtered);
 		}
@@ -68,8 +68,8 @@ export function ProductsList() {
 						{categories.map((category) => {
 							// electronics -> E + lectronics
 							return (
-								<option value={category}>
-									{capitalizeFirstLetter(category)}
+								<option value={category.name}>
+									{capitalizeFirstLetter(category.name)}
 								</option>
 							);
 						})}
@@ -106,10 +106,11 @@ export function ProductsList() {
 						// key - специальный ключ (id), который используеться при отображении массивов
 						// этот ключ позваляет определить, какой элемент был удален добавлен и т. п.
 						return (
+							// {product.price}
 							<ProductCard
-								name={product.title}
-								img={product.image}
-								price={product.price}
+								name={product.name}
+								img={product.img}
+								price={0}
 								key={product.id}
 								id={product.id}
 							/>

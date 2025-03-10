@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { IProduct } from "./useProducts"
-//；月木月 ，竹十十十十
+
 export function useProductById(id: number | undefined){
 
     const [product , setProduct] = useState<IProduct>()
@@ -15,9 +15,14 @@ export function useProductById(id: number | undefined){
         async function fetchProduct() {
             try {
                 setLoading(true)
-                const response = await fetch(`https://fakestoreapi.com/products/${id}`)
-                const productData = await response.json()
-                setProduct(productData)
+                const response = await fetch(`http://localhost:8000/api/product/${id}`)
+                const result = await response.json()
+
+                if (result.status === "ok") {
+                    setProduct(result.data)
+                } else {
+                    setError(result.message)
+                }
             } catch (error) {
                 console.log(error)
                 if (error instanceof Error) {
