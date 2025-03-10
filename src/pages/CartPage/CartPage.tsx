@@ -59,44 +59,19 @@ const handleDeleteAll = () => {
 	setLocalCart({})
   }
 
-  return (
-    <div>
-      {displayedItems.map((cartItem) => (
-        <div className="CartMain" key={cartItem.id}>
-            <div className="CartItemDiv">
-            <img className="cartImage" src={cartItem.image} alt={cartItem.title} />
-            <div className="textItem">
-                <p>{cartItem.title}</p>
-                <p>{cartItem.description}</p>
-                <p>Category: {cartItem.category}</p>
-                <p>Price: {cartItem.price}$</p>
-                <div className="quantityButtons">
-                <button className="incriment" onClick={() => handleIncrement(cartItem.id)}>+</button>
-                <span>{localCart[cartItem.id] || 1}</span>
-                <button className="decriment" onClick={() => handleDecrement(cartItem.id)}>-</button>
-                </div>
-            </div>
-
-            <div className="buttonsItem">
-                <button className="normal">Buy</button>
-                <button className="normal">Go To</button>
-                <button className="normalD" onClick={() => handleRemoveItem(cartItem.id)}>Delete</button>
-            </div>
-            </div>
-        </div>
-      ))}
-
-      <></>
-
-	  {displayedItems.length > 0 && (
-        <div className="totalFoot">
-        <p>Total Price: {calculateTotalPrice()}$</p>
-            <button className="normal22" onClick={handleDeleteAll}>Delete All</button>
-        <button className="normal2" >Buy All</button>
-        </div>
-        )}
-    </div>
-  ) 
+	return (
+		<div>
+			{cartItems.map((cartItem) => {
+				return (
+					<div>
+						<h1>{cartItem.name}</h1>
+						<img src={cartItem.img} />
+						<button onClick={() => { removeItem(cartItem.id)}}>delete</button>
+					</div>
+				);
+			})}
+		</div>
+	);
 }
 
 

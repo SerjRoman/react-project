@@ -14,6 +14,9 @@ export function ProductPage() {
     
     const params = useParams()
     const { product, loading, error } = useProductById(Number(params.id))
+
+
+
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const {addItem, isInCart} = useCartContext()
@@ -37,12 +40,16 @@ export function ProductPage() {
             </div> :
             <div className="product-container">
             <div className="product-content">
-                <img src={product?.image} alt="Product" className="product-image" />
+                <img src={product?.img} alt="Product" className="product-image" />
                 <div className="product-info">
-                    <h1 className="product-title">{product?.title}</h1>
+                    <h1 className="product-title">{product?.name}</h1>
                     <p className="product-description">{product?.description}</p>
-                    <p className="product-price">Price: ${product?.price}</p>
-                    <p className="product-category">Category: {product?.category}</p>
+                    {/* <p className="product-price">Price: ${product?.price}</p> */}
+
+
+                    {/* Треба отримати категорію по categoryId з product */}
+                    {/* <p className="product-category">Category: {product?.category}</p> */}
+
                 </div>
             </div>
             <div className="product-buttons">
