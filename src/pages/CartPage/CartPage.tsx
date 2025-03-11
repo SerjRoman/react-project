@@ -7,11 +7,11 @@ export function CartPage() {
 	const {cartItems, removeItem, clearCart} = useCartContext();
     const [sumPrice, setSumPrice] = useState<number>(0)
 
-
-    useEffect(()=>{
-        const totalPrice = cartItems.reduce((sum,currentPrice) => sum + currentPrice.price, 0)
-        setSumPrice(totalPrice)  
-    },[cartItems])
+// він сломався, тому я його поки що залишу і не буду трогать
+    // useEffect(()=>{
+    //     const totalPrice = cartItems.reduce((sum,currentPrice) => sum + currentPrice.price, 0)
+    //     setSumPrice(totalPrice)  
+    // },[cartItems])
 
 	return (
 		<div className="cart-box">
