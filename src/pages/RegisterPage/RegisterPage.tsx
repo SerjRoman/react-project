@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useUserContext } from "../../context/userContext"
+import "./RegisterPage.css"
 
 interface IForm {
     username:string;
@@ -8,106 +10,105 @@ interface IForm {
 }
 // yup validation
 export function RegisterPage() {
+	const {register: userRegister} = useUserContext()
+
 	const { register, handleSubmit, formState } = useForm<IForm>({
 		mode: "onSubmit",
 	});
 	const onSubmit = async (data: IForm) => {
-		console.log(data);
-		// const result = await fetch("http://localhost:8000/api/user/registration", {
-		// 	method: "POST",
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify(data),
-		// })
-		// const res = await fetch("http://localhost:8000/api/user/...")
+		userRegister(data.username, data.email, data.password, data.image)
 	};
 	return (
-		<div>
-			<form onSubmit={handleSubmit(onSubmit)}>
-            <label>
-					Username:
-					<input
-						type="username"
-						{...register("username", {
-							required: {
-								value: true,
-								message: "Field is required",
-							},
-							minLength: {
-								value: 7,
-								message: "Length should be > 7",
-							},
-							maxLength: {
-								value: 50,
-								message: "Length should be < 50",
-							},
-						})}
-					/>
-				</label>
-                <p>{formState.errors.username?.message}</p>
-				<label>
-					Email:
-					<input
-						type="email"
-						{...register("email", {
-							required: {
-								value: true,
-								message: "Field is required",
-							},
-							minLength: {
-								value: 7,
-								message: "Length should be > 7",
-							},
-							maxLength: {
-								value: 50,
-								message: "Length should be < 50",
-							},
-						})}
-					/>
-				</label>
-                <p>{formState.errors.email?.message}</p>
-				<label>
-					Password:
-					<input
-						type="password"
-						{...register("password", {
-							required: {
-								value: true,
-								message: "Field is required",
-							},
-							minLength: {
-								value: 7,
-								message: "Length should be > 7",
-							},
-							maxLength: {
-								value: 50,
-								message: "Length should be < 50",
-							},
-						})}
-					/>
+		<div className="content-registration-div">
+			<div className="registration-div">
+				<form onSubmit={handleSubmit(onSubmit)} className="registration-form">
+					<h1>
+						Registration
+					</h1>
+					<label>
+						Username:
+						<input
+							type="username"
+							{...register("username", {
+								required: {
+									value: true,
+									message: "Field is required",
+								},
+								minLength: {
+									value: 7,
+									message: "Length should be > 7",
+								},
+								maxLength: {
+									value: 50,
+									message: "Length should be < 50",
+								},
+							})}
+						/>
+						<p className="error-message">{formState.errors.username?.message}</p>
+					</label>
 					
-				</label>
-                <p>{formState.errors.password?.message}</p>
-                <label>
-					Image:
-					<input
-						type="url"
-						{...register("image", {
-							required: {
-								value: true,
-								message: "Field is required",
-							},
-							minLength: {
-								value: 7,
-								message: "Length should be > 7",
-                            }
-						})}
-					/>
-				</label>
-                <p>{formState.errors.image?.message}</p>
-				<button type="submit">Submit</button>
-			</form>
+					<label>
+						Email:
+						<input
+							type="email"
+							{...register("email", {
+								required: {
+									value: true,
+									message: "Field is required",
+								},
+								minLength: {
+									value: 7,
+									message: "Length should be > 7",
+								},
+								maxLength: {
+									value: 50,
+									message: "Length should be < 50",
+								},
+							})}
+						/>
+						<p className="error-message">{formState.errors.email?.message}</p>
+					</label>
+					<label>
+						Password:
+						<input
+							type="password"
+							{...register("password", {
+								required: {
+									value: true,
+									message: "Field is required",
+								},
+								minLength: {
+									value: 7,
+									message: "Length should be > 7",
+								},
+								maxLength: {
+									value: 50,
+									message: "Length should be < 50",
+								},
+							})}
+						/>
+						<p className="error-message">{formState.errors.password?.message}</p>
+					</label>
+					<label>
+						Image:
+						<input
+							type="url"
+							{...register("image", {
+								required: {
+									value: true,
+									message: "Field is required",
+								},
+								minLength: {
+									value: 7,
+									message: "Length should be > 7",
+								}
+							})}
+						/>
+						<p className="error-message">{formState.errors.image?.message}</p>
+					</label>
+					<button type="submit">Submit</button>
+				</form>
+			</div>
 		</div>
 	);
 }

@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useUserContext } from "../../context/userContext"
+import "./LoginPage.css"
 
 interface IForm {
 	email: string;
@@ -6,66 +8,77 @@ interface IForm {
 }
 // yup validation
 export function LoginPage() {
+	const {login} = useUserContext()
+
 	const { register, handleSubmit, formState } = useForm<IForm>({
 		mode: "onSubmit",
 	});
 	const onSubmit = async (data: IForm) => {
-		console.log(data);
-		const result = await fetch("http://localhost:8000/api/user/login", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(data),
-		})
-
+		login(data.email, data.password)
 	};
 	return (
-		<div>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<label>
-					Email:
-					<input
-						type="email"
-						{...register("email", {
-							required: {
-								value: true,
-								message: "Field is required",
-							},
-							minLength: {
-								value: 7,
-								message: "Length should be > 7",
-							},
-							maxLength: {
-								value: 50,
-								message: "Length should be < 50",
-							},
-						})}
-					/>
-					<p>{formState.errors.email?.message}</p>
-				</label>
-				<label>
-					Password:
-					<input
-						type="password"
-						{...register("password", {
-							required: {
-								value: true,
-								message: "Field is required",
-							},
-							minLength: {
-								value: 7,
-								message: "Length should be > 7",
-							},
-							maxLength: {
-								value: 50,
-								message: "Length should be < 50",
-							},
-						})}
-					/>
-					<p>{formState.errors.password?.message}</p>
-				</label>
-				<button type="submit">Submit</button>
+		<div className="loginContainer">
+			<form onSubmit={handleSubmit(onSubmit)} className="loginForm">
+
+				<div className="loginTitleContainer">
+					<p className="loginTitle">Authorization</p>
+				</div>
+
+
+				<div className="loginInputsContainer">
+					<label className="loginLabel">
+						Email:
+						<input
+							className="loginInput"
+							type="email"
+							placeholder="Enter email..."
+							{...register("email", {
+								required: {
+									value: true,
+									message: "Field is required",
+								},
+								minLength: {
+									value: 7,
+									message: "Length should be > 7",
+								},
+								maxLength: {
+									value: 50,
+									message: "Length should be < 50",
+								},
+							})}
+						/>
+						<p className="loginError">{formState.errors.email?.message}</p>
+					</label>
+					<label className="loginLabel">
+						Password:
+						<input
+							className="loginInput"
+							type="password"
+							placeholder="Enter password..."
+							{...register("password", {
+								required: {
+									value: true,
+									message: "Field is required",
+								},
+								minLength: {
+									value: 7,
+									message: "Length should be > 7",
+								},
+								maxLength: {
+									value: 50,
+									message: "Length should be < 50",
+								},
+							})}
+						/>
+						<p className="loginError">{formState.errors.password?.message}</p>
+					</label>
+				</div>
+				
+
+				<div className="loginButtonContainer">
+					<button type="submit" className="loginButtonSubmit">Submit</button>
+				</div>
+
 			</form>
 		</div>
 	);

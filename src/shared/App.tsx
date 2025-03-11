@@ -1,15 +1,16 @@
-
 // ╚(•⌂•)╝ ╚(•⌂•)╝ ╚(•⌂•)╝
 import { CartContextProvider } from "../context/cartContext";
+import { UserContextProvider } from "../context/userContext";
 import { AppRoutes } from "../routes/Routes";
 
-
 export function AppComponent() {
-	return (
-		<>
-			<CartContextProvider>
-				<AppRoutes/>
-			</CartContextProvider>
-		</>
-	);
+    return (
+        <>
+            <UserContextProvider>
+                <CartContextProvider>
+                    <AppRoutes />
+                </CartContextProvider>
+            </UserContextProvider>
+        </>
+    );
 }
