@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useUserContext } from "../../context/userContext"
 import "./RegisterPage.css"
+import { Link } from "react-router-dom";
 
 interface IForm {
     username:string;
@@ -107,6 +108,9 @@ export function RegisterPage() {
 						<p className="error-message">{formState.errors.image?.message}</p>
 					</label>
 					<button type="submit">Submit</button>
+					<div>
+						<Link to="/login">Go to login</Link>
+					</div>
 				</form>
 			</div>
 		</div>

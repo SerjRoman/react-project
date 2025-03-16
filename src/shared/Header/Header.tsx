@@ -67,8 +67,7 @@ export function Header() {
 						Кошик
 					</Link>
 				</button>
-
-				<button className="ImageIcon">
+				<Link className="ImageIcon" to={user ? "/profile" : "/login"}>
 					<img
 						className="profilePhoto"
 						src={
@@ -78,8 +77,7 @@ export function Header() {
 						}
 						alt=""
 					/>
-					{/* <img className='profilePhoto' src={user?.image} alt="" /> */}
-				</button>
+				</Link>
 			</header>
 		</div>
 	);

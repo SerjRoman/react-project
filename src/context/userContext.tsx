@@ -17,19 +17,19 @@ interface IUser {
 
 interface IUserContext {
 	user: IUser | null;
-	login: (email: string, password: string) => void;
+	login: (email: string, password: string) => Promise<string | void>;
 	register: (
 		username: string,
 		email: string,
 		password: string,
 		image: string
-	) => void;
+	) => Promise<string | void>;
 }
 
 const initialValue: IUserContext = {
 	user: null,
-	login: (email, password) => {},
-	register: (username, email, password, image) => {},
+	login: async (email, password) => {},
+	register: async (username, email, password, image) => {},
 };
 
 const userContext = createContext<IUserContext>(initialValue);
@@ -56,13 +56,16 @@ export function UserContextProvider(props: IUserContextProvider) {
 			const result: Response<IUser> = await response.json();
 			if (result.status == "error") {
 				console.log(result.message);
+				return result.message
 			} else {
 				setUser(result.data);
 			}
-		} catch {}
+		} catch {
+
+		}
 	}
 
-	async function login(email: string, password: string) {
+	async function login(email: string, password: string): Promise<string | void> {
 		try {
 			const response = await fetch(
 				"http://localhost:8000/api/user/login",
@@ -75,21 +78,24 @@ export function UserContextProvider(props: IUserContextProvider) {
 				}
 			);
 			const result: Response<string> = await response.json();
-
 			if (result.status == "error") {
 				console.log(result.message);
-			} else {
-				localStorage.setItem("token", result.data);
+				return result.message
+			}
+			else {
 				getUser(result.data);
 			}
-		} catch {}
+        }
+		 catch {
+			return "Unexpected error"
+		 }
 	}
 	async function register(
 		username: string,
 		email: string,
 		password: string,
 		image: string
-	) {
+	): Promise<void | string>{
 		try {
 			const response = await fetch(
 				"http://localhost:8000/api/user/registration",
@@ -110,11 +116,14 @@ export function UserContextProvider(props: IUserContextProvider) {
 
 			if (result.status === "error") {
 				console.log(result.message);
+				return result.message
 			} else {
 				localStorage.setItem("token", result.data);
 				getUser(result.data);
 			}
-		} catch {}
+		} catch {
+			return "Unexpected error"
+		}
 	}
 	useEffect(() => {
 		const userToken = localStorage.getItem("token");
